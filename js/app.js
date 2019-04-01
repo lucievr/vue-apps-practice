@@ -1,0 +1,48 @@
+//jshint esversion:6
+
+const shoppingList = new Vue({
+    el: '#shopping-list',
+    data: {
+        state: 'default',
+        header: 'shopping list app',
+        newItem: '',
+        items: [
+            {
+                label: '10 apples',
+                purchased: false,
+                highPriority: false,
+            },
+            {
+                label: '2 loaves of bread',
+                purchased: true,
+                highPriority: false,
+            },
+            {
+                label: 'oat milk',
+                purchased: false,
+                highPriority: false,
+            },
+        ]
+    },
+    computed: {
+        reversedItems() {
+            return this.items.slice(0).reverse();
+        }
+    },
+    methods: {
+        saveItem: function() {
+            this.items.push({
+                label: this.newItem,
+                purchased: false,
+            });
+            this.newItem = '';
+        },
+        changeState: function(newState) {
+            this.state = newState;
+            this.newItem = '';
+        },
+        togglePurchased: function(item) {
+            item.purchased = !item.purchased;
+        }
+    }
+});
